@@ -1,7 +1,6 @@
 package aoc_utils
 
 import (
-	"errors"
 	"os"
 	"strings"
 )
@@ -14,13 +13,14 @@ func ReadInput(pathToFile string) []string {
 	return strings.Split(string(data), "\n")
 }
 
-func GetBlankLineIndex(input []string) (int, error) {
-	for index, l := range input {
+func GetSeparators(input []string) []int {
+	var separators []int
+	for i, l := range input {
 		if l == "" {
-			return index, nil
+			separators = append(separators, i)
 		}
 	}
-	return 0, errors.New("no separator")
+	return separators
 }
 
 func Pad2dArray(
