@@ -22,3 +22,19 @@ func GetBlankLineIndex(input []string) (int, error) {
 	}
 	return 0, errors.New("no separator")
 }
+
+func Pad2dArray(
+	input []string,
+	padding string,
+) []string {
+	result := make([]string, 0)
+	emptyRow := strings.Repeat(padding, len(input[0])+2)
+
+	result = append(result, emptyRow)
+	for _, row := range input {
+		result = append(result, padding+row+padding)
+	}
+	result = append(result, emptyRow)
+
+	return result
+}
