@@ -52,8 +52,8 @@ func LCM(values []int) (int, error) {
 		return 0, fmt.Errorf("values must contain at least 2 elements")
 	}
 	result := values[0] * values[1] / GCD(values[0], values[1])
-	for i := 2; i < len(values)-2; i++ {
-		result, _ = LCM([]int{result, values[i]})
+	for i := 0; i < len(values)-2; i++ {
+		result, _ = LCM([]int{result, values[i+2]})
 	}
 	return result, nil
 }
