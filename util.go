@@ -1,6 +1,7 @@
 package aoc_utils
 
 import (
+	"fmt"
 	"os"
 	"strings"
 )
@@ -37,4 +38,22 @@ func Pad2dArray(
 	result = append(result, emptyRow)
 
 	return result
+}
+
+func GCD(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func LCM(values []int) (int, error) {
+	if len(values) < 2 {
+		return 0, fmt.Errorf("values must contain at least 2 elements")
+	}
+	result := values[0] * values[1] / GCD(values[0], values[1])
+	for i := 2; i < len(values)-2; i++ {
+		result, _ = LCM([]int{result, values[i]})
+	}
+	return result, nil
 }
