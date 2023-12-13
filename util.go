@@ -3,6 +3,7 @@ package aoc_utils
 import (
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 )
 
@@ -75,4 +76,22 @@ func LCM(values []int) (int, error) {
 		result, _ = LCM([]int{result, values[i+2]})
 	}
 	return result, nil
+}
+
+func FloodFill(m [][]string, border []string, paint string, x, y int) {
+	if m[y][x] != paint && !slices.Contains(border, m[y][x]) {
+		m[y][x] = paint
+		if x+1 != len(m[0]) {
+			FloodFill(m, border, paint, x+1, y)
+		}
+		if x-1 != -1 {
+			FloodFill(m, border, paint, x-1, y)
+		}
+		if y+1 != len(m) {
+			FloodFill(m, border, paint, x, y+1)
+		}
+		if y-1 != -1 {
+			FloodFill(m, border, paint, x, y-1)
+		}
+	}
 }
