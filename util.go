@@ -24,7 +24,26 @@ func GetSeparators(input []string) []int {
 	return separators
 }
 
-func Pad2dArray(
+func Pad2dStringArray(
+	input [][]string,
+	padding string) [][]string {
+	result := make([][]string, 0)
+	emptyRow := strings.Repeat(padding, len(input[0])+2)
+
+	result = append(result, strings.Split(emptyRow, ""))
+	for _, row := range input {
+		r := make([]string, 0)
+		r = append(r, padding)
+		r = append(r, row...)
+		r = append(r, padding)
+		result = append(result, r)
+	}
+	result = append(result, strings.Split(emptyRow, ""))
+
+	return result
+}
+
+func PadStringArray(
 	input []string,
 	padding string,
 ) []string {
