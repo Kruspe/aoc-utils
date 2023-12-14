@@ -95,3 +95,13 @@ func FloodFill(m [][]string, border []string, paint string, x, y int) {
 		}
 	}
 }
+
+func GetPairs[K interface{}](input []K) [][]K {
+	var result [][]K
+	for i, l := range input {
+		for j := i + 1; j < len(input); j++ {
+			result = append(result, []K{l, input[j]})
+		}
+	}
+	return result
+}
