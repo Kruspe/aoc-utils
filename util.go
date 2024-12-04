@@ -3,12 +3,41 @@ package aoc_utils
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"runtime"
 	"slices"
 	"strings"
 )
 
 func ReadInput(pathToFile string) []string {
 	data, err := os.ReadFile(pathToFile)
+	if err != nil {
+		panic(err)
+	}
+	return strings.Split(string(data), "\n")
+}
+
+func Data() []string {
+	_, f, _, _ := runtime.Caller(1)
+	data, err := os.ReadFile(filepath.Join(filepath.Dir(f), "data.txt"))
+	if err != nil {
+		panic(err)
+	}
+	return strings.Split(string(data), "\n")
+}
+
+func Example() []string {
+	_, f, _, _ := runtime.Caller(1)
+	data, err := os.ReadFile(filepath.Join(filepath.Dir(f), "example.txt"))
+	if err != nil {
+		panic(err)
+	}
+	return strings.Split(string(data), "\n")
+}
+
+func Example2() []string {
+	_, f, _, _ := runtime.Caller(1)
+	data, err := os.ReadFile(filepath.Join(filepath.Dir(f), "example2.txt"))
 	if err != nil {
 		panic(err)
 	}
