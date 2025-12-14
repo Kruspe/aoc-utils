@@ -125,12 +125,26 @@ func FloodFill(m [][]string, border []string, paint string, x, y int) {
 	}
 }
 
-func GetPairs[K interface{}](input []K) [][]K {
+func GetPairs[K any](input []K) [][]K {
 	var result [][]K
 	for i, l := range input {
 		for j := i + 1; j < len(input); j++ {
 			result = append(result, []K{l, input[j]})
 		}
+	}
+	return result
+}
+
+func Combinations[T any](input []T) [][]T {
+	result := make([][]T, 0)
+	for i := 1; i < (1 << len(input)); i++ {
+		var subset []T
+		for object := uint(0); object < uint(len(input)); object++ {
+			if (i>>object)&1 == 1 {
+				subset = append(subset, input[object])
+			}
+		}
+		result = append(result, subset)
 	}
 	return result
 }
